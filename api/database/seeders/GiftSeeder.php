@@ -107,12 +107,19 @@ class GiftSeeder extends Seeder
             $gifts = $categoryData['gifts'];
             unset($categoryData['gifts']);
 
-            $category = GiftCategory::create($categoryData);
+            $category = GiftCategory::updateOrCreate(
+                ['slug' => $categoryData['slug']],
+                $categoryData
+            );
 
             foreach ($gifts as $index => $giftData) {
                 $giftData['gift_category_id'] = $category->id;
                 $giftData['display_order'] = $index + 1;
-                Gift::create($giftData);
+                
+                Gift::updateOrCreate(
+                    ['slug' => $giftData['slug']],
+                    $giftData
+                );
             }
         }
 

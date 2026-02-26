@@ -18,10 +18,10 @@
 
 | # | Test | Method | Endpoint | Status | Notes |
 |---|------|--------|----------|--------|-------|
-| 0.1 | Server starts | — | `php artisan serve` | ⬜ | |
-| 0.2 | Migrations run | — | `php artisan migrate` | ⬜ | |
-| 0.3 | Seeders run | — | `php artisan db:seed` | ⬜ | |
-| 0.4 | Health check | `GET` | `/up` | ⬜ | |
+| 0.1 | Server starts | — | `php artisan serve` | ✅ | |
+| 0.2 | Migrations run | — | `php artisan migrate` | ✅ | |
+| 0.3 | Seeders run | — | `php artisan db:seed` | ✅ | |
+| 0.4 | Health check | `GET` | `/up` | ✅ | |
 
 ---
 
