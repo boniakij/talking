@@ -19,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+// Dummy route for Laravel's default ResetPassword notification
+Route::get('/auth/reset-password/{token}', function ($token) {
+    return response()->json(['message' => 'Please use the POST /auth/reset-password endpoint with this token.', 'token' => $token]);
+})->name('password.reset');
+
 Route::prefix('v1')->group(function () {
     
     // Public routes

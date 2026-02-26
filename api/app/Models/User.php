@@ -224,4 +224,19 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasBlocked($user) || $this->isBlockedBy($user);
     }
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        // In a real app, this would point to your frontend URL
+        // For now, we'll just log it so we can test the API
+        $url = 'http://localhost:3000/reset-password?token=' . $token . '&email=' . $this->email;
+        
+        $this->notify(new \Illuminate\Auth\Notifications\ResetPassword($token));
+    }
 }

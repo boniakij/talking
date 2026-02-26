@@ -31,5 +31,18 @@
 - **Result:** PASSED
 - **Evidence:** Old token invalidated, new token issued and functional.
 
+## 1.8 Forgot Password
+- **Command:** `POST /api/v1/auth/forgot-password`
+- **Result:** PASSED (After fix)
+- **Fix Applied:** Added a dummy `password.reset` route in `api.php` to satisfy Laravel's URL generator.
+- **Evidence:** Reset link successfully generated and logged.
+
+| Test Case | Description | Method | Endpoint | Status | Notes |
+|---|---|---|---|---|---|
+| 1.8 | Forgot password | `POST` | `/auth/forgot-password` | ✅ | Fixed: Added dummy 'password.reset' route |
+| 1.9 | Reset password | `POST` | `/auth/reset-password` | ✅ | |
+| 1.10 | Resend verification email | `POST` | `/auth/resend-verification` | ✅ | |
+| 1.11 | Verify email | `GET` | `/auth/verify-email/{id}/{hash}` | ✅ | |
+
 ---
 **Status: ALL PASSED ✅**
