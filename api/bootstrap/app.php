@@ -25,6 +25,8 @@ return Application::configure(basePath: dirname(__DIR__))
             'update.last.seen' => UpdateLastSeen::class,
             'check.blocked' => CheckBlockedUsers::class,
             'check.conversation.participant' => CheckConversationParticipant::class,
+            'is.admin' => \App\Http\Middleware\IsAdmin::class,
+            'is.super_admin' => \App\Http\Middleware\IsSuperAdmin::class,
         ]);
         
         $middleware->statefulApi();

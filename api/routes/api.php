@@ -260,6 +260,49 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     });
 });
 
+// Admin routes (Phase 12) — Admin level
+Route::prefix('v1/admin')->middleware(['auth:sanctum', 'is.admin'])->group(function () {
+    // User Management
+    Route::get('users', [App\Http\Controllers\Api\AdminController::class, 'listUsers']);
+    Route::get('users/{id}', [App\Http\Controllers\Api\AdminController::class, 'userDetail']);
+    Route::post('users/{id}/suspend', [App\Http\Controllers\Api\AdminController::class, 'suspendUser']);
+    Route::post('users/{id}/restore', [App\Http\Controllers\Api\AdminController::class, 'restoreUser']);
+    Route::post('users/{id}/warn', [App\Http\Controllers\Api\AdminController::class, 'warnUser']);
 
+    // Content Moderation
+    Route::get('reports', [App\Http\Controllers\Api\AdminController::class, 'listReports']);
+    Route::get('reports/{id}', [App\Http\Controllers\Api\AdminController::class, 'reportDetail']);
+    Route::post('reports/{id}/resolve', [App\Http\Controllers\Api\AdminController::class, 'resolveReport']);
+
+    // Analytics
+    Route::get('analytics/users', [App\Http\Controllers\Api\AdminController::class, 'analyticsUsers']);
+    Route::get('analytics/calls', [App\Http\Controllers\Api\AdminController::class, 'analyticsCalls']);
+});
+
+// Admin routes (Phase 12) — Super Admin only
+Route::prefix('v1/admin')->middleware(['auth:sanctum', 'is.super_admin'])->group(function () {
+    // Ban (Super Admin only)
+    Route::post('users/{id}/ban', [App\Http\Controllers\Api\AdminController::class, 'banUser']);
+
+    // Admin Management
+    Route::get('admins', [App\Http\Controllers\Api\AdminController::class, 'listAdmins']);
+    Route::post('admins', [App\Http\Controllers\Api\AdminController::class, 'createAdmin']);
+    Route::put('admins/{id}', [App\Http\Controllers\Api\AdminController::class, 'updateAdmin']);
+    Route::delete('admins/{id}', [App\Http\Controllers\Api\AdminController::class, 'removeAdmin']);
+
+    // Analytics (Super Admin)
+    Route::get('analytics/overview', [App\Http\Controllers\Api\AdminController::class, 'analyticsOverview']);
+    Route::get('analytics/revenue', [App\Http\Controllers\Api\AdminController::class, 'analyticsRevenue']);
+
+    // Platform Settings
+    Route::get('settings', [App\Http\Controllers\Api\AdminController::class, 'getSettings']);
+    Route::put('settings', [App\Http\Controllers\Api\AdminController::class, 'updateSettings']);
+
+    // Gift Management
+    Route::get('gifts', [App\Http\Controllers\Api\AdminController::class, 'listGifts']);
+    Route::post('gifts', [App\Http\Controllers\Api\AdminController::class, 'createGift']);
+    Route::put('gifts/{id}', [App\Http\Controllers\Api\AdminController::class, 'updateGift']);
+    Route::delete('gifts/{id}', [App\Http\Controllers\Api\AdminController::class, 'deleteGift']);
+});
 
 
