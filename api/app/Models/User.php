@@ -150,27 +150,23 @@ class User extends Authenticatable implements MustVerifyEmail
     // Follow relationships
     public function followers()
     {
-        return $this->belongsToMany(User::class, 'follows', 'following_id', 'follower_id')
-            ->withTimestamps();
+        return $this->belongsToMany(User::class, 'follows', 'following_id', 'follower_id');
     }
 
     public function following()
     {
-        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'following_id')
-            ->withTimestamps();
+        return $this->belongsToMany(User::class, 'follows', 'follower_id', 'following_id');
     }
 
     // Block relationships
     public function blockedUsers()
     {
-        return $this->belongsToMany(User::class, 'blocks', 'blocker_id', 'blocked_id')
-            ->withTimestamps();
+        return $this->belongsToMany(User::class, 'blocks', 'blocker_id', 'blocked_id');
     }
 
     public function blockedBy()
     {
-        return $this->belongsToMany(User::class, 'blocks', 'blocked_id', 'blocker_id')
-            ->withTimestamps();
+        return $this->belongsToMany(User::class, 'blocks', 'blocked_id', 'blocker_id');
     }
 
     // Helper methods

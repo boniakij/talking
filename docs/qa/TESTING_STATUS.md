@@ -64,15 +64,15 @@
 
 | # | Test | Method | Endpoint | Status | Notes |
 |---|------|--------|----------|--------|-------|
-| 3.1 | Follow user | `POST` | `/users/{id}/follow` | ⬜ | |
-| 3.2 | Unfollow user | `DELETE` | `/users/{id}/follow` | ⬜ | |
-| 3.3 | Get followers | `GET` | `/users/{id}/followers` | ⬜ | |
-| 3.4 | Get following | `GET` | `/users/{id}/following` | ⬜ | |
-| 3.5 | Block user | `POST` | `/users/{id}/block` | ⬜ | |
-| 3.6 | Unblock user | `DELETE` | `/users/{id}/block` | ⬜ | |
-| 3.7 | List blocked users | `GET` | `/users/blocked` | ⬜ | |
-| 3.8 | Follow self (should fail) | `POST` | `/users/{self_id}/follow` | ⬜ | Should return error |
-| 3.9 | Block self (should fail) | `POST` | `/users/{self_id}/block` | ⬜ | Should return error |
+| 3.1 | Follow user | `POST` | `/users/{id}/follow` | ✅ | |
+| 3.2 | Unfollow user | `DELETE` | `/users/{id}/follow` | ✅ | |
+| 3.3 | Get followers | `GET` | `/users/{id}/followers` | ✅ | Fixed: SQL updated_at error |
+| 3.4 | Get following | `GET` | `/users/{id}/following` | ✅ | |
+| 3.5 | Block user | `POST` | `/users/{id}/block` | ✅ | Removes follow records |
+| 3.6 | Unblock user | `DELETE` | `/users/{id}/block` | ✅ | |
+| 3.7 | List blocked users | `GET` | `/users/blocked` | ✅ | |
+| 3.8 | Follow/Block self | `POST` | `/users/{self_id}/follow` | ✅ | Correctly returns 422 |
+| 3.9 | Verify block safety | `GET` | `/profiles/{id}` | ✅ | Fixed: Added block check to ProfileController |
 
 ---
 
@@ -296,10 +296,10 @@
 
 | Phase | Tests | Passed | Failed | Pending |
 |-------|-------|--------|--------|---------|
-| 0 — Foundation | 4 | 0 | 0 | 4 |
-| 1 — Auth | 11 | 0 | 0 | 11 |
-| 2 — User/Profile | 10 | 0 | 0 | 10 |
-| 3 — Social | 9 | 0 | 0 | 9 |
+| 0 — Foundation | 4 | 4 | 0 | 0 |
+| 1 — Auth | 11 | 7 | 0 | 4 |
+| 2 — User/Profile | 10 | 10 | 0 | 0 |
+| 3 — Social | 9 | 9 | 0 | 0 |
 | 4 — Chat | 11 | 0 | 0 | 11 |
 | 5 — Group Chat | 3 | 0 | 0 | 3 |
 | 6 — Audio Calls | 7 | 0 | 0 | 7 |

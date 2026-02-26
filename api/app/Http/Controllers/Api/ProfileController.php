@@ -172,9 +172,15 @@ class ProfileController extends BaseController
     public function show(Request $request, $id): JsonResponse
     {
         $user = User::with(['profile', 'languages.language'])->findOrFail($id);
+        $authUser = $request->user();
+
+        // Check if blocked
+        if ($authUser->hasBlockedOrIsBlockedBy($user)) {
+            return $this->errorResponse('User not found', null, 404);
+        }
 
         // Check if profile is public
-        if (!$user->profile->is_public && $user->id !== $request->user()->id) {
+        if (!$user->profile->is_public && $user->id !== $authUser->id) {
             return $this->errorResponse('This profile is private', null, 403);
         }
 
