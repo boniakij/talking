@@ -99,6 +99,21 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(UserMatch::class);
     }
 
+    public function appNotifications()
+    {
+        return $this->hasMany(AppNotification::class);
+    }
+
+    public function deviceTokens()
+    {
+        return $this->hasMany(DeviceToken::class);
+    }
+
+    public function notificationSetting()
+    {
+        return $this->hasOne(NotificationSetting::class);
+    }
+
     public function learningLanguages()
     {
         return $this->languages()->where('type', 'learning');

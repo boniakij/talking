@@ -49,4 +49,8 @@ return [
         'price_per_coin' => env('STRIPE_PRICE_PER_COIN', 0.01), // $0.01 per coin
     ],
 
+    'fcm' => [
+        'server_key' => env('FCM_SERVER_KEY', ''),
+    ],
+
 ];

@@ -235,4 +235,22 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     });
 });
 
+// Notification routes (Phase 10)
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    Route::prefix('notifications')->group(function () {
+        Route::get('/', [App\Http\Controllers\Api\NotificationController::class, 'index']);
+        Route::post('{id}/read', [App\Http\Controllers\Api\NotificationController::class, 'markAsRead']);
+        Route::post('read-all', [App\Http\Controllers\Api\NotificationController::class, 'markAllAsRead']);
+        
+        // Device tokens
+        Route::post('device-token', [App\Http\Controllers\Api\NotificationController::class, 'registerDeviceToken']);
+        Route::delete('device-token', [App\Http\Controllers\Api\NotificationController::class, 'removeDeviceToken']);
+        
+        // Settings
+        Route::get('settings', [App\Http\Controllers\Api\NotificationController::class, 'getSettings']);
+        Route::put('settings', [App\Http\Controllers\Api\NotificationController::class, 'updateSettings']);
+    });
+});
+
+
 
