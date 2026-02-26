@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Events\MessageSent;
+use App\Listeners\AutoTranslateMessage;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Phase 7: Auto-translate messages on send
+        Event::listen(MessageSent::class, AutoTranslateMessage::class);
     }
 }
+

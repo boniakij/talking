@@ -180,3 +180,41 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     // Comment deletion (separate route)
     Route::delete('comments/{id}', [App\Http\Controllers\Api\CommentController::class, 'destroy']);
 });
+
+// Translation routes (Phase 7)
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    Route::prefix('translations')->group(function () {
+        // Translate content
+        Route::get('message/{id}', [App\Http\Controllers\Api\TranslationController::class, 'translateMessage']);
+        Route::get('post/{id}', [App\Http\Controllers\Api\TranslationController::class, 'translatePost']);
+        Route::post('text', [App\Http\Controllers\Api\TranslationController::class, 'translateText']);
+        
+        // Language support
+        Route::get('languages', [App\Http\Controllers\Api\TranslationController::class, 'languages']);
+        Route::get('detect', [App\Http\Controllers\Api\TranslationController::class, 'detect']);
+        
+        // Quality scoring
+        Route::post('{id}/score', [App\Http\Controllers\Api\TranslationController::class, 'score']);
+    });
+});
+
+// Gift System routes (Phase 8)
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    Route::prefix('gifts')->group(function () {
+        // Gift catalog
+        Route::get('/', [App\Http\Controllers\Api\GiftController::class, 'index']);
+        Route::get('categories', [App\Http\Controllers\Api\GiftController::class, 'categories']);
+        
+        // Gift transactions
+        Route::post('send', [App\Http\Controllers\Api\GiftController::class, 'send']);
+        Route::get('history', [App\Http\Controllers\Api\GiftController::class, 'history']);
+        Route::get('leaderboard', [App\Http\Controllers\Api\GiftController::class, 'leaderboard']);
+        
+        // Coin system
+        Route::get('coins/balance', [App\Http\Controllers\Api\GiftController::class, 'balance']);
+        Route::post('coins/topup', [App\Http\Controllers\Api\GiftController::class, 'topup']);
+        Route::post('coins/confirm', [App\Http\Controllers\Api\GiftController::class, 'confirmTopup']);
+        Route::get('coins/transactions', [App\Http\Controllers\Api\GiftController::class, 'coinTransactions']);
+    });
+});
+

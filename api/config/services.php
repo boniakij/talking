@@ -35,4 +35,18 @@ return [
         ],
     ],
 
+    'google_translate' => [
+        'api_key' => env('GOOGLE_TRANSLATE_API_KEY', ''),
+        'base_url' => env('GOOGLE_TRANSLATE_BASE_URL', 'https://translation.googleapis.com/language/translate/v2'),
+        'cache_ttl_hours' => env('TRANSLATION_CACHE_TTL_HOURS', 168), // 7 days
+        'auto_translate_enabled' => env('AUTO_TRANSLATE_ENABLED', false),
+    ],
+
+    'stripe' => [
+        'secret' => env('STRIPE_SECRET_KEY', ''),
+        'webhook_secret' => env('STRIPE_WEBHOOK_SECRET', ''),
+        'currency' => env('STRIPE_CURRENCY', 'usd'),
+        'price_per_coin' => env('STRIPE_PRICE_PER_COIN', 0.01), // $0.01 per coin
+    ],
+
 ];

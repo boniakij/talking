@@ -22,6 +22,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'provider_id',
         'role',
         'status',
+        'auto_translate_enabled',
+        'preferred_language',
         'last_seen_at',
     ];
 
@@ -36,6 +38,7 @@ class User extends Authenticatable implements MustVerifyEmail
             'email_verified_at' => 'datetime',
             'last_seen_at' => 'datetime',
             'password' => 'hashed',
+            'auto_translate_enabled' => 'boolean',
         ];
     }
 
@@ -64,6 +67,26 @@ class User extends Authenticatable implements MustVerifyEmail
     public function nativeLanguages()
     {
         return $this->languages()->where('type', 'native');
+    }
+
+    public function translations()
+    {
+        return $this->hasMany(TranslationUsageLog::class);
+    }
+
+    public function coinWallet()
+    {
+        return $this->hasOne(CoinWallet::class);
+    }
+
+    public function sentGifts()
+    {
+        return $this->hasMany(GiftTransaction::class, 'sender_id');
+    }
+
+    public function receivedGifts()
+    {
+        return $this->hasMany(GiftTransaction::class, 'receiver_id');
     }
 
     public function learningLanguages()
