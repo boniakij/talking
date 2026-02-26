@@ -89,6 +89,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(GiftTransaction::class, 'receiver_id');
     }
 
+    public function matchingPreference()
+    {
+        return $this->hasOne(MatchingPreference::class);
+    }
+
+    public function matches()
+    {
+        return $this->hasMany(UserMatch::class);
+    }
+
     public function learningLanguages()
     {
         return $this->languages()->where('type', 'learning');

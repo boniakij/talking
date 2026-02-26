@@ -218,3 +218,21 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     });
 });
 
+// Matching routes (Phase 9)
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    Route::prefix('matching')->group(function () {
+        // Preferences
+        Route::get('preferences', [App\Http\Controllers\Api\MatchingController::class, 'getPreferences']);
+        Route::put('preferences', [App\Http\Controllers\Api\MatchingController::class, 'updatePreferences']);
+        
+        // Suggestions
+        Route::get('suggestions', [App\Http\Controllers\Api\MatchingController::class, 'suggestions']);
+        
+        // Match management
+        Route::post('accept/{userId}', [App\Http\Controllers\Api\MatchingController::class, 'accept']);
+        Route::post('decline/{userId}', [App\Http\Controllers\Api\MatchingController::class, 'decline']);
+        Route::get('matches', [App\Http\Controllers\Api\MatchingController::class, 'matches']);
+    });
+});
+
+
