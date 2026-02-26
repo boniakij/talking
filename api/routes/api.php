@@ -252,5 +252,14 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     });
 });
 
+// Report routes (Phase 11)
+Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
+    Route::prefix('reports')->group(function () {
+        Route::post('/', [App\Http\Controllers\Api\ReportController::class, 'store']);
+        Route::get('my', [App\Http\Controllers\Api\ReportController::class, 'myReports']);
+    });
+});
+
+
 
 
