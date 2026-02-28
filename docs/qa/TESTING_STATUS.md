@@ -211,12 +211,12 @@
 
 | # | Test | Method | Endpoint | Status | Notes |
 |---|------|--------|----------|--------|-------|
-| 12.1 | Get preferences | `GET` | `/matching/preferences` | ⬜ | |
-| 12.2 | Update preferences | `PUT` | `/matching/preferences` | ⬜ | Body: `{preferred_languages, preferred_age_min...}` |
-| 12.3 | Get suggestions | `GET` | `/matching/suggestions` | ⬜ | |
-| 12.4 | Accept match | `POST` | `/matching/accept/{userId}` | ⬜ | |
-| 12.5 | Decline match | `POST` | `/matching/decline/{userId}` | ⬜ | |
-| 12.6 | List my matches | `GET` | `/matching/matches` | ⬜ | |
+| 12.1 | Get preferences | `GET` | `/matching/preferences` | ✅ | |
+| 12.2 | Update preferences | `PUT` | `/matching/preferences` | ✅ | Body: `{preferred_languages, preferred_age_min...}` |
+| 12.3 | Get suggestions | `GET` | `/matching/suggestions` | ✅ | |
+| 12.4 | Accept match | `POST` | `/matching/accept/{userId}` | ✅ | |
+| 12.5 | Decline match | `POST` | `/matching/decline/{userId}` | ✅ | |
+| 12.6 | List my matches | `GET` | `/matching/matches` | ✅ | |
 
 ---
 
@@ -312,9 +312,9 @@
 | 9 — Social Feed | 13 | 13 | 0 | 0 |
 | 10 — Translation | 6 | 6 | 0 | 0 |
 | 11 — Gifts/Coins | 9 | 9 | 0 | 0 |
-| 12 — Matching | 6 | 0 | 0 | 6 |
+| 12 — Matching | 6 | 6 | 0 | 0 |
 | 13 — Notifications | 7 | 0 | 0 | 7 |
 | 14 — Reports | 2 | 0 | 0 | 2 |
 | 15 — Admin | 23 | 0 | 0 | 23 |
 | Edge Cases | 7 | 0 | 0 | 7 |
-| **TOTAL** | **153** | **104** | **0** | **49** |
+| **TOTAL** | **153** | **110** | **0** | **43** |

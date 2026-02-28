@@ -18,7 +18,7 @@ class MatchResource extends JsonResource
 
         return [
             'id' => $this->id,
-            'user' => $otherUser ? [
+            'user' => ($otherUser && !($otherUser instanceof \Illuminate\Http\Resources\MissingValue)) ? [
                 'id' => $otherUser->id,
                 'username' => $otherUser->username,
                 'avatar' => $otherUser->profile?->avatar_url,

@@ -210,10 +210,10 @@ class MatchingService
         }
 
         // Get candidate users (exclude blocked, already matched, self)
-        $blockedIds = $user->blockedUsers()->pluck('blocked_user_id')->toArray();
-        $blockedByIds = DB::table('blocked_users')
-            ->where('blocked_user_id', $user->id)
-            ->pluck('user_id')
+        $blockedIds = $user->blockedUsers()->pluck('blocked_id')->toArray();
+        $blockedByIds = DB::table('blocks')
+            ->where('blocked_id', $user->id)
+            ->pluck('blocker_id')
             ->toArray();
         $existingMatchIds = UserMatch::forUser($user->id)
             ->whereIn('status', ['pending', 'accepted'])
@@ -336,8 +336,8 @@ class MatchingService
 
             // Add both users as participants
             $conversation->participants()->attach([
-                $user->id => ['role' => 'member', 'joined_at' => now()],
-                $matchedUserId => ['role' => 'member', 'joined_at' => now()],
+                $user->id,
+                $matchedUserId,
             ]);
 
             // Update match status
