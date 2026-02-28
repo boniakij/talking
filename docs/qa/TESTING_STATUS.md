@@ -126,13 +126,13 @@
 
 | # | Test | Method | Endpoint | Status | Notes |
 |---|------|--------|----------|--------|-------|
-| 7.1 | Initiate video call | `POST` | `/video/initiate` | ⬜ | Body: `{receiver_id}` |
-| 7.2 | Answer video call | `POST` | `/video/{id}/answer` | ⬜ | |
-| 7.3 | Decline video call | `POST` | `/video/{id}/decline` | ⬜ | |
-| 7.4 | End video call | `POST` | `/video/{id}/end` | ⬜ | |
-| 7.5 | ICE candidate | `POST` | `/video/{id}/ice-candidate` | ⬜ | |
-| 7.6 | Toggle video on/off | `POST` | `/video/{id}/toggle-video` | ⬜ | |
-| 7.7 | Video call history | `GET` | `/video/history` | ⬜ | |
+| 7.1 | Initiate video call | `POST` | `/video/initiate` | ✅ | |
+| 7.2 | Answer video call | `POST` | `/video/{id}/answer` | ✅ | |
+| 7.3 | Decline video call | `POST` | `/video/{id}/decline` | ✅ | |
+| 7.4 | End video call | `POST` | `/video/{id}/end` | ✅ | |
+| 7.5 | ICE candidate | `POST` | `/video/{id}/ice-candidate` | ✅ | |
+| 7.6 | Toggle video on/off | `POST` | `/video/{id}/toggle-video` | ✅ | |
+| 7.7 | Video call history | `GET` | `/video/history` | ✅ | |
 
 ---
 
@@ -307,7 +307,7 @@
 | 4 — Chat | 11 | 11 | 0 | 0 |
 | 5 — Group Chat | 6 | 6 | 0 | 0 |
 | 6 — Audio Calls | 7 | 7 | 0 | 0 |
-| 7 — Video Calls | 7 | 0 | 0 | 7 |
+| 7 — Video Calls | 7 | 7 | 0 | 0 |
 | 8 — Voice Rooms | 15 | 0 | 0 | 15 |
 | 9 — Social Feed | 13 | 0 | 0 | 13 |
 | 10 — Translation | 6 | 0 | 0 | 6 |
@@ -317,4 +317,4 @@
 | 14 — Reports | 2 | 0 | 0 | 2 |
 | 15 — Admin | 23 | 0 | 0 | 23 |
 | Edge Cases | 7 | 0 | 0 | 7 |
-| **TOTAL** | **153** | **54** | **0** | **99** |
+| **TOTAL** | **153** | **61** | **0** | **92** |
