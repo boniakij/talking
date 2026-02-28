@@ -27,7 +27,7 @@ class ChatController extends BaseController
             $request->input('per_page', 15)
         );
 
-        return $this->sendResponse(
+        return $this->successResponse(
             ConversationResource::collection($conversations)->response()->getData(true),
             'Conversations retrieved successfully'
         );
@@ -46,7 +46,7 @@ class ChatController extends BaseController
 
         // Prevent creating conversation with self
         if ($otherUser->id === $request->user()->id) {
-            return $this->sendError('Cannot create conversation with yourself', [], 422);
+            return $this->errorResponse('Cannot create conversation with yourself', null, 422);
         }
 
         try {
@@ -55,13 +55,13 @@ class ChatController extends BaseController
                 $otherUser
             );
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 new ConversationResource($conversation),
                 'Conversation created successfully',
                 201
             );
         } catch (ValidationException $e) {
-            return $this->sendError('Validation error', $e->errors(), 422);
+            return $this->errorResponse('Validation error', $e->errors(), 422);
         }
     }
 
@@ -75,10 +75,10 @@ class ChatController extends BaseController
 
         // Verify user is a participant
         if (!$conversation->isParticipant($request->user())) {
-            return $this->sendError('Unauthorized', [], 403);
+            return $this->errorResponse('Unauthorized', null, 403);
         }
 
-        return $this->sendResponse(
+        return $this->successResponse(
             new ConversationResource($conversation),
             'Conversation retrieved successfully'
         );
@@ -97,7 +97,7 @@ class ChatController extends BaseController
 
         // Verify user is a participant
         if (!$conversation->isParticipant($request->user())) {
-            return $this->sendError('Unauthorized', [], 403);
+            return $this->errorResponse('Unauthorized', null, 403);
         }
 
         // Broadcast typing event
@@ -107,7 +107,7 @@ class ChatController extends BaseController
             $request->is_typing
         ))->toOthers();
 
-        return $this->sendResponse(
+        return $this->successResponse(
             null,
             'Typing indicator sent'
         );

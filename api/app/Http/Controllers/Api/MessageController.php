@@ -25,7 +25,7 @@ class MessageController extends BaseController
 
         // Verify user is a participant
         if (!$conversation->isParticipant($request->user())) {
-            return $this->sendError('Unauthorized', [], 403);
+            return $this->errorResponse('Unauthorized', null, 403);
         }
 
         $messages = $this->messageService->getMessages(
@@ -33,7 +33,7 @@ class MessageController extends BaseController
             $request->input('per_page', 50)
         );
 
-        return $this->sendResponse(
+        return $this->successResponse(
             MessageResource::collection($messages)->response()->getData(true),
             'Messages retrieved successfully'
         );
@@ -59,13 +59,13 @@ class MessageController extends BaseController
                 $request->parent_message_id
             );
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 new MessageResource($message),
                 'Message sent successfully',
                 201
             );
         } catch (ValidationException $e) {
-            return $this->sendError('Validation error', $e->errors(), 422);
+            return $this->errorResponse('Validation error', $e->errors(), 422);
         }
     }
 
@@ -79,12 +79,12 @@ class MessageController extends BaseController
         try {
             $this->messageService->deleteMessage($message, $request->user());
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 null,
                 'Message deleted successfully'
             );
         } catch (ValidationException $e) {
-            return $this->sendError('Validation error', $e->errors(), 422);
+            return $this->errorResponse('Validation error', $e->errors(), 422);
         }
     }
 
@@ -97,7 +97,7 @@ class MessageController extends BaseController
 
         // Verify user is a participant
         if (!$conversation->isParticipant($request->user())) {
-            return $this->sendError('Unauthorized', [], 403);
+            return $this->errorResponse('Unauthorized', null, 403);
         }
 
         $count = $this->messageService->markConversationAsRead(
@@ -105,7 +105,7 @@ class MessageController extends BaseController
             $request->user()
         );
 
-        return $this->sendResponse(
+        return $this->successResponse(
             ['messages_marked_read' => $count],
             'Conversation marked as read'
         );

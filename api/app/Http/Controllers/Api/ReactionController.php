@@ -32,13 +32,13 @@ class ReactionController extends BaseController
                 $request->emoji
             );
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 $reaction,
                 'Reaction added successfully',
                 201
             );
         } catch (ValidationException $e) {
-            return $this->sendError('Validation error', $e->errors(), 422);
+            return $this->errorResponse('Validation error', $e->errors(), 422);
         }
     }
 
@@ -56,12 +56,12 @@ class ReactionController extends BaseController
         );
 
         if ($removed) {
-            return $this->sendResponse(
+            return $this->successResponse(
                 null,
                 'Reaction removed successfully'
             );
         }
 
-        return $this->sendError('Reaction not found', [], 404);
+        return $this->errorResponse('Reaction not found', null, 404);
     }
 }

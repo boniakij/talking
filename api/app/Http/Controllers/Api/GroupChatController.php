@@ -34,13 +34,13 @@ class GroupChatController extends BaseController
                 $request->participant_ids
             );
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 new ConversationResource($conversation),
                 'Group conversation created successfully',
                 201
             );
         } catch (ValidationException $e) {
-            return $this->sendError('Validation error', $e->errors(), 422);
+            return $this->errorResponse('Validation error', $e->errors(), 422);
         }
     }
 
@@ -57,7 +57,7 @@ class GroupChatController extends BaseController
 
         // Verify requester is a participant
         if (!$conversation->isParticipant($request->user())) {
-            return $this->sendError('Unauthorized', [], 403);
+            return $this->errorResponse('Unauthorized', null, 403);
         }
 
         $userToAdd = User::findOrFail($request->user_id);
@@ -65,12 +65,12 @@ class GroupChatController extends BaseController
         try {
             $this->conversationService->addGroupMember($conversation, $userToAdd);
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 new ConversationResource($conversation->load('participants')),
                 'Member added successfully'
             );
         } catch (ValidationException $e) {
-            return $this->sendError('Validation error', $e->errors(), 422);
+            return $this->errorResponse('Validation error', $e->errors(), 422);
         }
     }
 
@@ -83,7 +83,7 @@ class GroupChatController extends BaseController
 
         // Verify requester is a participant
         if (!$conversation->isParticipant($request->user())) {
-            return $this->sendError('Unauthorized', [], 403);
+            return $this->errorResponse('Unauthorized', null, 403);
         }
 
         $userToRemove = User::findOrFail($userId);
@@ -91,12 +91,12 @@ class GroupChatController extends BaseController
         try {
             $this->conversationService->removeGroupMember($conversation, $userToRemove);
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 new ConversationResource($conversation->load('participants')),
                 'Member removed successfully'
             );
         } catch (ValidationException $e) {
-            return $this->sendError('Validation error', $e->errors(), 422);
+            return $this->errorResponse('Validation error', $e->errors(), 422);
         }
     }
 }

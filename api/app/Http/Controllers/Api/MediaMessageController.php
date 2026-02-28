@@ -35,13 +35,13 @@ class MediaMessageController extends BaseController
                 $request->caption
             );
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 new MessageResource($message),
                 'Media message sent successfully',
                 201
             );
         } catch (ValidationException $e) {
-            return $this->sendError('Validation error', $e->errors(), 422);
+            return $this->errorResponse('Validation error', $e->errors(), 422);
         }
     }
 }

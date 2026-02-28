@@ -76,21 +76,22 @@
 
 ---
 
-## Phase 4: Chat System
-
+### Phase 4: Chat System
 | # | Test | Method | Endpoint | Status | Notes |
 |---|------|--------|----------|--------|-------|
-| 4.1 | List conversations | `GET` | `/chat/conversations` | ⬜ | |
-| 4.2 | Create DM conversation | `POST` | `/chat/conversations` | ⬜ | Body: `{user_id}` |
-| 4.3 | View conversation detail | `GET` | `/chat/conversations/{id}` | ⬜ | |
-| 4.4 | Send typing indicator | `POST` | `/chat/conversations/{id}/typing` | ⬜ | |
-| 4.5 | List messages in conversation | `GET` | `/chat/conversations/{id}/messages` | ⬜ | |
-| 4.6 | Send text message | `POST` | `/chat/conversations/{id}/messages` | ⬜ | Body: `{body}` |
-| 4.7 | Delete message | `DELETE` | `/chat/messages/{id}` | ⬜ | |
-| 4.8 | Mark conversation as read | `POST` | `/chat/conversations/{id}/read` | ⬜ | |
-| 4.9 | Send media message | `POST` | `/chat/conversations/{id}/media` | ⬜ | Multipart: `media` file |
-| 4.10 | Add message reaction | `POST` | `/chat/messages/{id}/reactions` | ⬜ | Body: `{emoji}` |
-| 4.11 | Remove message reaction | `DELETE` | `/chat/messages/{id}/reactions/{emoji}` | ⬜ | |
+| 4.1 | List conversations | `GET` | `/chat/conversations` | ✅ | Correctly returns latest message & info |
+| 4.2 | Create DM conversation | `POST` | `/chat/conversations` | ✅ | Idempotent & returns metadata |
+| 4.3 | View conversation detail | `GET` | `/chat/conversations/{id}` | ✅ | Full participant data return verified |
+| 4.4 | Send typing indicator | `POST` | `/chat/conversations/{id}/typing` | ✅ | Event broadcasting verified (logical) |
+| 4.5 | List messages in conversation | `GET` | `/chat/conversations/{id}/messages` | ✅ | Cursor pagination verified |
+| 4.6 | Send text message | `POST` | `/chat/conversations/{id}/messages` | ✅ | Verified content & status 'sent' |
+| 4.7 | Delete message | `DELETE` | `/chat/messages/{id}` | ✅ | Verified soft delete for sender |
+| 4.8 | Mark conversation as read | `POST` | `/chat/conversations/{id}/read` | ✅ | Verified unread count reset |
+| 4.9 | Send media message | `POST` | `/chat/conversations/{id}/media` | ✅ | Verified with real PNG uploads |
+| 4.10 | Add message reaction | `POST` | `/chat/messages/{id}/reactions` | ✅ | Emojis supported & persisted |
+| 4.11 | Remove message reaction | `DELETE` | `/chat/messages/{id}/reactions/{emoji}` | ✅ | Correctly handled |
+
+**Fixes Applied:** Fixed method undefined errors in `ChatController`, `MessageController`, `ReactionController`, `GroupChatController`, `MediaMessageController`, `CallController`, and `VideoController` (renamed `sendResponse`/`sendError` to `successResponse`/`errorResponse`).
 
 ---
 
@@ -98,9 +99,12 @@
 
 | # | Test | Method | Endpoint | Status | Notes |
 |---|------|--------|----------|--------|-------|
-| 5.1 | Create group | `POST` | `/chat/groups` | ⬜ | Body: `{name, member_ids: [...]}` |
-| 5.2 | Add member | `POST` | `/chat/groups/{id}/members` | ⬜ | Body: `{user_id}` |
-| 5.3 | Remove member | `DELETE` | `/chat/groups/{id}/members/{userId}` | ⬜ | |
+| 5.1 | Create group | `POST` | `/chat/groups` | ✅ | Min 3 participants verified |
+| 5.2 | Add member | `POST` | `/chat/groups/{id}/members` | ✅ | Dynamic growth verified |
+| 5.3 | Remove member | `DELETE` | `/chat/groups/{id}/members/{userId}` | ✅ | Membership logic verified |
+| 5.4 | Send group message | `POST` | `/chat/conversations/{id}/messages` | ✅ | Messaging in groups confirmed |
+| 5.5 | View group messages | `GET` | `/chat/conversations/{id}/messages` | ✅ | History retrieval confirmed |
+| 5.6 | Unauth access check | `GET` | `/chat/conversations/{id}/messages` | ✅ | Verified 403 for non-participants |
 
 ---
 
@@ -108,13 +112,13 @@
 
 | # | Test | Method | Endpoint | Status | Notes |
 |---|------|--------|----------|--------|-------|
-| 6.1 | Get STUN/TURN config | `GET` | `/calls/config` | ⬜ | |
-| 6.2 | Initiate call | `POST` | `/calls/initiate` | ⬜ | Body: `{receiver_id, type}` |
-| 6.3 | Answer call | `POST` | `/calls/{id}/answer` | ⬜ | |
-| 6.4 | Decline call | `POST` | `/calls/{id}/decline` | ⬜ | |
-| 6.5 | End call | `POST` | `/calls/{id}/end` | ⬜ | |
-| 6.6 | Send ICE candidate | `POST` | `/calls/{id}/ice-candidate` | ⬜ | Body: `{candidate}` |
-| 6.7 | Call history | `GET` | `/calls/history` | ⬜ | |
+| 6.1 | Get STUN/TURN config | `GET` | `/calls/config` | ✅ | Returns iceServers |
+| 6.2 | Initiate call | `POST` | `/calls/initiate` | ✅ | Fixed: Removed deprecated middleware call |
+| 6.3 | Answer call | `POST` | `/calls/{id}/answer` | ✅ | |
+| 6.4 | Decline call | `POST` | `/calls/{id}/decline` | ✅ | |
+| 6.5 | End call | `POST` | `/calls/{id}/end` | ✅ | |
+| 6.6 | Send ICE candidate | `POST` | `/calls/{id}/ice-candidate` | ✅ | |
+| 6.7 | Call history | `GET` | `/calls/history` | ✅ | |
 
 ---
 
@@ -300,9 +304,9 @@
 | 1 — Auth | 11 | 7 | 0 | 4 |
 | 2 — User/Profile | 10 | 10 | 0 | 0 |
 | 3 — Social | 9 | 9 | 0 | 0 |
-| 4 — Chat | 11 | 0 | 0 | 11 |
-| 5 — Group Chat | 3 | 0 | 0 | 3 |
-| 6 — Audio Calls | 7 | 0 | 0 | 7 |
+| 4 — Chat | 11 | 11 | 0 | 0 |
+| 5 — Group Chat | 6 | 6 | 0 | 0 |
+| 6 — Audio Calls | 7 | 7 | 0 | 0 |
 | 7 — Video Calls | 7 | 0 | 0 | 7 |
 | 8 — Voice Rooms | 15 | 0 | 0 | 15 |
 | 9 — Social Feed | 13 | 0 | 0 | 13 |
@@ -313,4 +317,4 @@
 | 14 — Reports | 2 | 0 | 0 | 2 |
 | 15 — Admin | 23 | 0 | 0 | 23 |
 | Edge Cases | 7 | 0 | 0 | 7 |
-| **TOTAL** | **150** | **0** | **0** | **150** |
+| **TOTAL** | **153** | **54** | **0** | **99** |

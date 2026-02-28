@@ -21,7 +21,6 @@ class CallController extends BaseController
 
     public function __construct(CallService $callService)
     {
-        $this->middleware('auth:sanctum');
         $this->callService = $callService;
     }
 
@@ -36,7 +35,7 @@ class CallController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors(), 400);
+            return $this->errorResponse('Validation Error', $validator->errors(), 400);
         }
 
         try {
@@ -52,13 +51,13 @@ class CallController extends BaseController
             $call->markAsRinging();
             broadcast(new CallInitiated($call->load(['caller', 'callee']), $request->sdp_offer));
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 new CallResource($call->load(['caller', 'callee'])),
                 'Call initiated successfully',
                 201
             );
         } catch (\Exception $e) {
-            return $this->sendError($e->getMessage(), [], 422);
+            return $this->errorResponse($e->getMessage(), null, 422);
         }
     }
 
@@ -72,14 +71,14 @@ class CallController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors(), 400);
+            return $this->errorResponse('Validation Error', $validator->errors(), 400);
         }
 
         try {
             $call = Call::findOrFail($id);
             
             if (!$call->involvesUser($request->user())) {
-                return $this->sendError('Unauthorized', [], 403);
+                return $this->errorResponse('Unauthorized', null, 403);
             }
 
             $call = $this->callService->answerCall($call, $request->user(), $request->sdp_answer);
@@ -87,12 +86,12 @@ class CallController extends BaseController
             // Broadcast to caller
             broadcast(new CallAnswered($call, $request->sdp_answer));
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 new CallResource($call->load(['caller', 'callee'])),
                 'Call answered successfully'
             );
         } catch (\Exception $e) {
-            return $this->sendError($e->getMessage(), [], 422);
+            return $this->errorResponse($e->getMessage(), null, 422);
         }
     }
 
@@ -105,7 +104,7 @@ class CallController extends BaseController
             $call = Call::findOrFail($id);
             
             if (!$call->involvesUser($request->user())) {
-                return $this->sendError('Unauthorized', [], 403);
+                return $this->errorResponse('Unauthorized', null, 403);
             }
 
             $call = $this->callService->declineCall($call, $request->user());
@@ -113,12 +112,12 @@ class CallController extends BaseController
             // Broadcast to caller
             broadcast(new CallDeclined($call));
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 ['call_id' => $call->id],
                 'Call declined successfully'
             );
         } catch (\Exception $e) {
-            return $this->sendError($e->getMessage(), [], 422);
+            return $this->errorResponse($e->getMessage(), null, 422);
         }
     }
 
@@ -131,7 +130,7 @@ class CallController extends BaseController
             $call = Call::findOrFail($id);
             
             if (!$call->involvesUser($request->user())) {
-                return $this->sendError('Unauthorized', [], 403);
+                return $this->errorResponse('Unauthorized', null, 403);
             }
 
             $call = $this->callService->endCall($call, $request->user());
@@ -139,12 +138,12 @@ class CallController extends BaseController
             // Broadcast to both participants
             broadcast(new CallEnded($call));
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 new CallResource($call->load(['caller', 'callee'])),
                 'Call ended successfully'
             );
         } catch (\Exception $e) {
-            return $this->sendError($e->getMessage(), [], 422);
+            return $this->errorResponse($e->getMessage(), null, 422);
         }
     }
 
@@ -158,14 +157,14 @@ class CallController extends BaseController
         ]);
 
         if ($validator->fails()) {
-            return $this->sendError('Validation Error', $validator->errors(), 400);
+            return $this->errorResponse('Validation Error', $validator->errors(), 400);
         }
 
         try {
             $call = Call::findOrFail($id);
             
             if (!$call->involvesUser($request->user())) {
-                return $this->sendError('Unauthorized', [], 403);
+                return $this->errorResponse('Unauthorized', null, 403);
             }
 
             $this->callService->exchangeIceCandidate($call, $request->user(), $request->candidate);
@@ -181,12 +180,12 @@ class CallController extends BaseController
                 $request->candidate
             ));
 
-            return $this->sendResponse(
+            return $this->successResponse(
                 ['success' => true],
                 'ICE candidate exchanged successfully'
             );
         } catch (\Exception $e) {
-            return $this->sendError($e->getMessage(), [], 422);
+            return $this->errorResponse($e->getMessage(), null, 422);
         }
     }
 
@@ -199,7 +198,7 @@ class CallController extends BaseController
         
         $calls = $this->callService->getCallHistory($request->user(), 'audio', $perPage);
 
-        return $this->sendResponse(
+        return $this->successResponse(
             CallResource::collection($calls)->response()->getData(true),
             'Call history retrieved successfully'
         );
@@ -212,6 +211,6 @@ class CallController extends BaseController
     {
         $config = $this->callService->getStunTurnConfig();
 
-        return $this->sendResponse($config, 'Configuration retrieved successfully');
+        return $this->successResponse($config, 'Configuration retrieved successfully');
     }
 }
