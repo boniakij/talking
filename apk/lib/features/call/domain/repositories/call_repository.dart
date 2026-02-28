@@ -8,9 +8,11 @@ abstract class CallRepository {
   Future<void> rejectCall(String callId);
   Future<void> endCall(String callId);
 
-  // WebRTC Interface
-  Future<RTCPeerConnection> createPeerConnection();
+  // WebSocket methods
+  void initWebSocket(String token);
+  void disposeWebSocket();
   Stream<SignalingMessage> get signalingStream;
+  Stream<CallSession> get incomingCallStream;
   void sendSignalingMessage(String callId, SignalingMessage message);
   
   // Local Media

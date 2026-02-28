@@ -16,6 +16,7 @@ class CallBloc extends Bloc<CallEvent, CallState> {
   final RTCVideoRenderer _remoteRenderer = RTCVideoRenderer();
   
   StreamSubscription? _signalingSubscription;
+  StreamSubscription? _incomingCallSubscription;
 
   CallBloc({required this.callRepository}) : super(CallIdle()) {
     on<InitiateCall>(_onInitiateCall);
@@ -25,6 +26,17 @@ class CallBloc extends Bloc<CallEvent, CallState> {
     on<HandleSignaling>(_onHandleSignaling);
 
     _initRenderers();
+    _setupListeners();
+  }
+
+  void _setupListeners() {
+    _incomingCallSubscription = callRepository.incomingCallStream.listen((session) {
+      add(ReceiveIncomingCall(session));
+    });
+
+    _signalingSubscription = callRepository.signalingStream.listen((message) {
+      add(HandleSignaling(message));
+    });
   }
 
   Future<void> _initRenderers() async {
