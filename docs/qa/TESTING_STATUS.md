@@ -140,21 +140,21 @@
 
 | # | Test | Method | Endpoint | Status | Notes |
 |---|------|--------|----------|--------|-------|
-| 8.1 | List public rooms | `GET` | `/rooms` | ⬜ | |
-| 8.2 | Create room | `POST` | `/rooms` | ⬜ | Body: `{name, description, is_private, max_capacity}` |
-| 8.3 | View room | `GET` | `/rooms/{id}` | ⬜ | |
-| 8.4 | Update room | `PUT` | `/rooms/{id}` | ⬜ | |
-| 8.5 | Delete room | `DELETE` | `/rooms/{id}` | ⬜ | |
-| 8.6 | Room history | `GET` | `/rooms/history` | ⬜ | |
-| 8.7 | Join room | `POST` | `/rooms/{id}/join` | ⬜ | |
-| 8.8 | Leave room | `POST` | `/rooms/{id}/leave` | ⬜ | |
-| 8.9 | Request to speak | `POST` | `/rooms/{id}/speak` | ⬜ | |
-| 8.10 | Promote to speaker | `POST` | `/rooms/{id}/speakers/{userId}` | ⬜ | |
-| 8.11 | Demote speaker | `DELETE` | `/rooms/{id}/speakers/{userId}` | ⬜ | |
-| 8.12 | Kick participant | `POST` | `/rooms/{id}/kick/{userId}` | ⬜ | |
-| 8.13 | Add co-host | `POST` | `/rooms/{id}/cohosts/{userId}` | ⬜ | |
-| 8.14 | Remove co-host | `DELETE` | `/rooms/{id}/cohosts/{userId}` | ⬜ | |
-| 8.15 | Send room reaction | `POST` | `/rooms/{id}/reactions` | ⬜ | Body: `{emoji}` |
+| 8.1 | List public rooms | `GET` | `/rooms` | ✅ | |
+| 8.2 | Create room | `POST` | `/rooms` | ✅ | |
+| 8.3 | View room | `GET` | `/rooms/{id}` | ✅ | |
+| 8.4 | Update room | `PUT` | `/rooms/{id}`| ✅ | |
+| 8.5 | Delete room | `DELETE` | `/rooms/{id}` | ✅ | |
+| 8.6 | Room history | `GET` | `/rooms/history` | ✅ | |
+| 8.7 | Join room | `POST` | `/rooms/{id}/join` | ✅ | |
+| 8.8 | Leave room | `POST` | `/rooms/{id}/leave` | ✅ | |
+| 8.9 | Request to speak | `POST` | `/rooms/{id}/speak` | ✅ | |
+| 8.10 | Promote to speaker | `POST` | `/rooms/{id}/speakers/{userId}` | ✅ | |
+| 8.11 | Demote speaker | `DELETE` | `/rooms/{id}/speakers/{userId}` | ✅ | |
+| 8.12 | Kick participant | `POST` | `/rooms/{id}/kick/{userId}` | ✅ | |
+| 8.13 | Add co-host | `POST` | `/rooms/{id}/cohosts/{userId}` | ✅ | |
+| 8.14 | Remove co-host | `DELETE` | `/rooms/{id}/cohosts/{userId}` | ✅ | |
+| 8.15 | Send room reaction | `POST` | `/rooms/{id}/reactions` | ✅ | |
 
 ---
 
@@ -308,7 +308,7 @@
 | 5 — Group Chat | 6 | 6 | 0 | 0 |
 | 6 — Audio Calls | 7 | 7 | 0 | 0 |
 | 7 — Video Calls | 7 | 7 | 0 | 0 |
-| 8 — Voice Rooms | 15 | 0 | 0 | 15 |
+| 8 — Voice Rooms | 15 | 15 | 0 | 0 |
 | 9 — Social Feed | 13 | 0 | 0 | 13 |
 | 10 — Translation | 6 | 0 | 0 | 6 |
 | 11 — Gifts/Coins | 9 | 0 | 0 | 9 |
@@ -317,4 +317,4 @@
 | 14 — Reports | 2 | 0 | 0 | 2 |
 | 15 — Admin | 23 | 0 | 0 | 23 |
 | Edge Cases | 7 | 0 | 0 | 7 |
-| **TOTAL** | **153** | **61** | **0** | **92** |
+| **TOTAL** | **153** | **76** | **0** | **77** |
