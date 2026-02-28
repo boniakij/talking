@@ -182,12 +182,12 @@
 
 | # | Test | Method | Endpoint | Status | Notes |
 |---|------|--------|----------|--------|-------|
-| 10.1 | List supported languages | `GET` | `/translations/languages` | ⬜ | |
-| 10.2 | Detect language | `GET` | `/translations/detect` | ⬜ | Query: `?text=hello` |
-| 10.3 | Translate text | `POST` | `/translations/text` | ⬜ | Body: `{text, source, target}` |
-| 10.4 | Translate message | `GET` | `/translations/message/{id}` | ⬜ | |
-| 10.5 | Translate post | `GET` | `/translations/post/{id}` | ⬜ | |
-| 10.6 | Score translation | `POST` | `/translations/{id}/score` | ⬜ | Body: `{score}` |
+| 10.1 | List supported languages | `GET` | `/translations/languages` | ✅ | |
+| 10.2 | Detect language | `GET` | `/translations/detect` | ✅ | Query: `?text=hello` |
+| 10.3 | Translate text | `POST` | `/translations/text` | ✅ | Body: `{text, source, target}` |
+| 10.4 | Translate message | `GET` | `/translations/message/{id}` | ✅ | |
+| 10.5 | Translate post | `GET` | `/translations/post/{id}` | ✅ | |
+| 10.6 | Score translation | `POST` | `/translations/{id}/score` | ✅ | Body: `{score}` |
 
 ---
 
@@ -310,11 +310,11 @@
 | 7 — Video Calls | 7 | 7 | 0 | 0 |
 | 8 — Voice Rooms | 15 | 15 | 0 | 0 |
 | 9 — Social Feed | 13 | 13 | 0 | 0 |
-| 10 — Translation | 6 | 0 | 0 | 6 |
+| 10 — Translation | 6 | 6 | 0 | 0 |
 | 11 — Gifts/Coins | 9 | 0 | 0 | 9 |
 | 12 — Matching | 6 | 0 | 0 | 6 |
 | 13 — Notifications | 7 | 0 | 0 | 7 |
 | 14 — Reports | 2 | 0 | 0 | 2 |
 | 15 — Admin | 23 | 0 | 0 | 23 |
 | Edge Cases | 7 | 0 | 0 | 7 |
-| **TOTAL** | **153** | **89** | **0** | **64** |
+| **TOTAL** | **153** | **95** | **0** | **58** |
