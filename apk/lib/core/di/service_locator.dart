@@ -6,6 +6,9 @@ import 'package:banitalk/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:banitalk/features/chat/domain/repositories/chat_repository.dart';
 import 'package:banitalk/features/chat/data/repositories/chat_repository_impl.dart';
 import 'package:banitalk/features/chat/presentation/bloc/chat_bloc.dart';
+import 'package:banitalk/features/call/domain/repositories/call_repository.dart';
+import 'package:banitalk/features/call/data/repositories/call_repository_impl.dart';
+import 'package:banitalk/features/call/presentation/bloc/call_bloc.dart';
 
 final sl = GetIt.instance;
 
@@ -23,9 +26,13 @@ Future<void> init() async {
   sl.registerLazySingleton<ChatRepository>(
     () => ChatRepositoryImpl(apiClient: sl()),
   );
+  sl.registerLazySingleton<CallRepository>(
+    () => CallRepositoryImpl(apiClient: sl()),
+  );
   
   // Blocs
   sl.registerFactory(() => AuthBloc(authRepository: sl()));
   sl.registerFactory(() => ProfileBloc(profileRepository: sl()));
   sl.registerFactory(() => ChatBloc(chatRepository: sl()));
+  sl.registerFactory(() => CallBloc(callRepository: sl()));
 }

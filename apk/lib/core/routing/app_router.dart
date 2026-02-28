@@ -8,6 +8,9 @@ import 'package:banitalk/features/chat/presentation/pages/chat_list_screen.dart'
 import 'package:banitalk/features/chat/presentation/pages/chat_window_page.dart';
 import 'package:banitalk/features/chat/presentation/bloc/chat_bloc.dart';
 
+import 'package:banitalk/features/call/presentation/pages/calling_screen.dart';
+import 'package:banitalk/features/call/presentation/bloc/call_bloc.dart';
+
 class AppRouter {
   static final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final GlobalKey<NavigatorState> _shellNavigatorKey = GlobalKey<NavigatorState>();
@@ -81,6 +84,14 @@ class AppRouter {
             child: ChatWindowPage(conversationId: id, title: title),
           );
         },
+      ),
+      GoRoute(
+        path: '/call',
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) => BlocProvider(
+          create: (_) => sl<CallBloc>(),
+          child: const CallingScreen(),
+        ),
       ),
     ],
   );

@@ -50,7 +50,7 @@ This document provides a granular technical roadmap for## Current Status: **Phas
 - [x] **Backend Sync**:
   - [x] Map to `/api/v1/users/*` and `/api/v1/profiles/*`.
 
-## Current Status: **Phase 3 Complete** ✅
+## Current Status: **Phase 4 In Progress** 🔄
 
 | Phase | Title | Status |
 |---|---|---|
@@ -58,10 +58,11 @@ This document provides a granular technical roadmap for## Current Status: **Phas
 | Phase 1 | Authentication & Onboarding UX | ✅ Complete |
 | Phase 2 | Profiles & Social Discovery | ✅ Complete |
 | Phase 3 | Real-time Messaging System | ✅ Complete |
+| Phase 4 | WebRTC Voice & Video Calls | 🔄 In Progress |
 
 ---
 
-## 💬 Phase 3: Real-time Messaging System
+## 📞 Phase 4: WebRTC Voice & Video Calls
 **Goal:** Lag-free, rich communication.
 
 - [x] **Chat List**:
@@ -78,17 +79,17 @@ This document provides a granular technical roadmap for## Current Status: **Phas
 ## 📞 Phase 4: WebRTC Voice & Video Calls
 **Goal:** High-fidelity 1-to-1 connection.
 
-- **Calling UI**:
-  - Full-screen animated calling state (Glassmorphism effect).
-  - Floating PiP (Picture-in-Picture) for multi-tasking.
-- **RTC Engine**:
-  - `flutter_webrtc` for P2P connection.
-  - Handling SDP/ICE candidates via WebSocket signaling.
-- **Hardware Integration**:
-  - Camera/Mic permissions check.
-  - Bluetooth/Earpiece switching via `audio_session`.
-- **Backend Sync**:
-  - Map to `/api/v1/calls/*` and `/api/v1/video/*`.
+- [x] **Calling UI**:
+  - [x] Full-screen animated calling state (Glassmorphism effect).
+  - [x] Floating PiP (Picture-in-Picture) for multi-tasking.
+- [x] **RTC Engine**:
+  - [x] `flutter_webrtc` for P2P connection.
+  - [x] Handling SDP/ICE candidates via WebSocket signaling.
+- [x] **Hardware Integration**:
+  - [x] Camera/Mic permissions check.
+  - [x] Bluetooth/Earpiece switching via `audio_session`.
+- [x] **Backend Sync**:
+  - [x] Map to `/api/v1/calls/*` and `/api/v1/video/*`.
 
 ## 🎙️ Phase 5: Voice Rooms & Community
 **Goal:** Collaborative cultural exchange.
