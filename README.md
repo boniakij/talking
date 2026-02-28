@@ -1,321 +1,243 @@
-# 🌍 Talkin - Global Multilingual Communication Platform
+# �️ BaniTalk — Language Learning & Cultural Exchange Platform
 
-> Breaking language barriers through real-time AI translation, social connection, and cultural exchange.
+> **Connect. Learn. Share. Grow.**
+> A comprehensive language learning and cultural exchange platform connecting people worldwide through real-time communication, AI-powered speech learning, and social features.
 
-[![Laravel](https://img.shields.io/badge/Backend-Laravel%2012-red?logo=laravel)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.2+-blue?logo=php)](https://php.net)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
-
----
-
-## 📖 About
-
-**Talkin** is a real-time global multilingual social communication platform where users from different countries and cultural backgrounds connect through text, voice, and video — with language barriers removed via instant AI translation.
-
-### Key Features
-- 💬 Real-time messaging with auto-translation
-- 🎧 Audio & video calls (WebRTC)
-- 🎙️ Live voice rooms
-- 📰 Social feed with cultural exchange
-- 🎁 Virtual gift economy
-- 🤝 AI-powered partner matching
-- 📚 Language learning tools
+[![Flutter Version](https://img.shields.io/badge/Flutter-3.27+-blue.svg)](https://flutter.dev)
+[![Laravel Version](https://img.shields.io/badge/Laravel-11.x-red.svg)](https://laravel.com)
+[![API Status](https://img.shields.io/badge/API-v1-green.svg)](./api/README.md)
+[![APK Status](https://img.shields.io/badge/APK-9%2F10%20Phases-orange.svg)](./docs/qa/APK_QA_STATUS.md)
 
 ---
 
-## 🚀 Current Status
+## � Project Structure
 
-### ✅ Phase 1: Authentication & User Management (COMPLETE)
-
-**17 API Endpoints Implemented:**
-
-#### Auth Module (8 endpoints)
-- User registration with email verification
-- Login/logout with JWT tokens
-- Password reset flow
-- Token refresh
-
-#### User Module (4 endpoints)
-- Get/update authenticated user
-- View user profiles
-- Search users
-
-#### Profile Module (5 endpoints)
-- Profile management (bio, avatar, languages)
-- Avatar upload
-- Multi-language support (native & learning)
-- Cultural interests
-
-**Database:**
-- 5 migrations created
-- 4 models (User, Profile, Language, UserLanguage)
-
-**Documentation:**
-- Complete setup guide: `api/PHASE1_SETUP.md`
-- Postman collection: `api/Talkin_API_Phase1.postman_collection.json`
-
----
-
-### ✅ Phase 2: Social Features (COMPLETE)
-
-**8 API Endpoints Implemented:**
-
-#### Follow System (4 endpoints)
-- Follow/unfollow users
-- View followers and following lists
-- Follower count caching for performance
-
-#### Block System (3 endpoints)
-- Block/unblock users
-- View blocked users list
-- Automatic unfollow on block
-- Block enforcement across all endpoints
-
-#### Advanced User Search (1 endpoint + features)
-- Full-text search (username, email, display name, bio)
-- Multiple filters: country, gender, language, age range, interests
-- Sort options: relevance, followers, recent
-- Popular search queries tracking
-- Search caching with Redis
-
-**Database:**
-- 3 new migrations (follows, blocks, follower counts)
-- 2 new models (Follow, Block)
-- Updated User and Profile models
-
-**Documentation:**
-- Complete setup guide: `api/PHASE2_SETUP.md`
-- Postman collection: `api/Talkin_API_Phase2.postman_collection.json`
-- Comprehensive spec: `.kiro/specs/phase2-social-features/`
-
----
-
-### 🔜 Phase 3: Chat System (NEXT)
-
-**Planned Features:**
-- Real-time messaging with WebSocket
-- 1-to-1 and group chat
-- Media sharing (images, videos, audio)
-- Message status tracking
-- Typing indicators
-- Online/offline status
-
-**Timeline:** Weeks 7-9 (20 tasks)
-- 30 languages seeded
-- User roles: user, admin, super_admin
-
-**Security:**
-- Rate limiting (5 login attempts/15 min)
-- Password hashing (bcrypt)
-- Email verification
-- Input validation
-
----
-
-## 📦 Installation
-
-### Prerequisites
-- PHP 8.2+
-- Composer
-- MySQL 8.0+ or PostgreSQL 14+
-- Node.js & NPM (for frontend)
-
-### Quick Start
-
-```bash
-# Clone repository
-git clone https://github.com/YOUR_USERNAME/talkin.git
-cd talkin
-
-# Install API dependencies
-cd api
-composer install
-
-# Configure environment
-cp .env.example .env
-php artisan key:generate
-
-# Update .env with your database credentials
-# DB_DATABASE=talkin
-# DB_USERNAME=root
-# DB_PASSWORD=
-
-# Run migrations and seed
-php artisan migrate
-php artisan db:seed
-
-# Create storage link
-php artisan storage:link
-
-# Start development server
-php artisan serve
+```
+banitalk/
+├── 📱 apk/                    # Flutter Mobile Application
+│   ├── lib/features/          # 11 Feature Modules (100+ files)
+│   ├── android/               # Android Platform Code
+│   ├── ios/                   # iOS Platform Code
+│   └── README.md              # APK Documentation ⬇️
+│
+├── 🔧 api/                    # Laravel Backend API
+│   ├── app/Http/Controllers/  # API Controllers
+│   ├── database/migrations/   # Database Schema
+│   ├── routes/api.php         # API Routes
+│   └── README.md              # API Documentation ⬇️
+│
+├── 📚 docs/                   # Documentation
+│   ├── dev/                   # Development Plans
+│   │   ├── apk-dev.md         # APK Development Roadmap ⬇️
+│   │   └── api-dev.md         # API Development Status ⬇️
+│   ├── qa/                    # QA & Testing
+│   │   ├── APK_QA_STATUS.md   # APK Testing Status ⬇️
+│   │   └── TESTING_STATUS.md  # API Testing Status ⬇️
+│   └── blueprint/             # Architecture Blueprints
+│
+└── README.md                  # This file
 ```
 
-API will be available at `http://localhost:8000`
+---
+
+## 📚 Quick Links
+
+| Documentation | Status | Description |
+|--------------|--------|-------------|
+| [📱 APK Documentation](./apk/README.md) | 9/10 Phases ✅ | Flutter app setup & features |
+| [🔧 API Documentation](./api/README.md) | v1 Complete ✅ | Laravel backend endpoints |
+| [📋 APK Dev Plan](./docs/dev/apk-dev.md) | Updated 2026-02-28 | Development roadmap |
+| [📋 API Dev Plan](./docs/dev/api-dev.md) | Updated 2026-02-28 | API development status |
+| [🧪 APK QA Status](./docs/qa/APK_QA_STATUS.md) | 100+ Tests ✅ | APK testing results |
+| [🧪 API QA Status](./docs/qa/TESTING_STATUS.md) | 200+ Tests ✅ | API endpoint testing |
+| [🏗️ Architecture](./docs/blueprint/) | Complete | System architecture docs |
 
 ---
 
-## 📚 Documentation
+## ✨ Features
 
-- **Setup Guide**: [api/PHASE1_SETUP.md](api/PHASE1_SETUP.md)
-- **Development Plan**: [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md)
-- **API Documentation**: See Postman collection
-- **Architecture**: [docs/blueprint/architecture.md](docs/blueprint/architecture.md)
-- **Database Schema**: [docs/blueprint/database.md](docs/blueprint/database.md)
+### Core Features
+- 🔐 **Authentication** — Secure login with Sanctum, Google/Apple OAuth
+- 💬 **Real-time Messaging** — WebSocket-powered chat with reactions
+- 📞 **Voice & Video Calls** — WebRTC P2P calling
+- 🎙️ **Voice Rooms** — Community audio rooms with Agora SDK
+- � **Social Feed** — Share moments with photos, videos, comments
+- 🤖 **Speech Learning** — AI-powered pronunciation coach
+- 🎁 **Virtual Economy** — Gifts, coins, in-app purchases
+- 💕 **Partner Matching** — Discovery deck with compatibility scoring
+- � **Push Notifications** — Firebase messaging
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Flutter 3.27+ | Dart 3.0+
+- PHP 8.2+ | Composer 2.x
+- Node.js 18+
+- MySQL 8.0+ or PostgreSQL 14+
+- Redis (optional, for caching)
+
+### 1. Clone & Setup
+```bash
+git clone https://github.com/yourorg/banitalk.git
+cd banitalk
+```
+
+### 2. Backend Setup
+```bash
+cd api
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+php artisan serve
+```
+📖 [Full API Setup Guide](./api/README.md)
+
+### 3. Mobile App Setup
+```bash
+cd apk
+flutter pub get
+flutter run
+```
+📖 [Full APK Setup Guide](./apk/README.md)
+
+---
+
+## 📱 APK Modules (11 Features)
+
+| Module | Files | Status | Description |
+|--------|-------|--------|-------------|
+| Auth | 8 | ✅ | Login, Register, Onboarding |
+| Chat | 11 | ✅ | Real-time messaging |
+| Call | 8 | ✅ | WebRTC voice/video |
+| Social Feed | 24 | ✅ | Moments, posts, comments |
+| Voice Rooms | - | ✅ | Agora audio rooms |
+| Speech Learning | 12 | ✅ | AI pronunciation coach |
+| Gifts | 11 | ✅ | Virtual economy |
+| Matching | 8 | ✅ | Partner discovery |
+| Notifications | 6 | ✅ | Push notifications |
+| Home | 1 | ✅ | Dashboard with modern UI |
+| Profile | 11 | ✅ | User profiles |
+
+**Total: 100+ Dart files | 25+ dependencies**
+
+---
+
+## 🔧 API Endpoints (v1)
+
+### Core Endpoints
+```
+# Auth
+POST   /api/v1/auth/register
+POST   /api/v1/auth/login
+POST   /api/v1/auth/logout
+
+# Users
+GET    /api/v1/users/me
+GET    /api/v1/users/search
+
+# Chat
+GET    /api/v1/chat/conversations
+POST   /api/v1/chat/messages
+
+# Calls
+POST   /api/v1/calls/initiate
+POST   /api/v1/calls/{id}/answer
+
+# Voice Rooms
+GET    /api/v1/rooms
+POST   /api/v1/rooms/{id}/join
+
+# Social
+GET    /api/v1/posts
+POST   /api/v1/posts/{id}/like
+
+# Speech Learning
+GET    /api/v1/sl/tongue-twisters
+POST   /api/v1/sl/analyze-pronunciation
+
+# Gifts
+GET    /api/v1/gifts
+POST   /api/v1/gifts/send
+GET    /api/v1/gifts/wallet
+
+# Matching
+GET    /api/v1/matching/discover
+POST   /api/v1/matching/like
+GET    /api/v1/matching/matches
+```
+
+📖 [Full API Documentation](./api/README.md) | [API Testing](./docs/qa/TESTING_STATUS.md)
+
+---
+
+## 📊 Development Status
+
+### APK Phases (9/10 Complete)
+
+| Phase | Feature | Status |
+|-------|---------|--------|
+| 0 | Base Architecture | ✅ |
+| 1 | Authentication | ✅ |
+| 2 | Profiles & Discovery | ✅ |
+| 3 | Messaging | ✅ |
+| 4 | Calls (WebRTC) | ✅ |
+| 5 | Voice Rooms | ✅ |
+| 6 | Social Feed | ✅ |
+| 7 | Speech Learning | ✅ |
+| 8 | Virtual Economy | ✅ |
+| 9 | Matching & Notifications | ✅ |
+| 10 | Production QA | ⏳ |
+
+📊 [Detailed APK QA Report](./docs/qa/APK_QA_STATUS.md)
+
+---
+
+## 🎨 Modern UI Features
+
+- 🌙 **Dark Theme** — `#0F1419` background
+- ✨ **Glassmorphism** — Backdrop blur cards
+- 🎭 **Animations** — 3D hover, pulsing badges, gradients
+- 🎯 **Floating Navigation** — Glass effect with animated selection
+- 🌊 **Animated Gradients** — Dynamic background colors
 
 ---
 
 ## 🧪 Testing
 
-### Using Postman
-
-Import the collection:
-```
-api/Talkin_API_Phase1.postman_collection.json
-```
-
-### Example API Calls
-
-**Register:**
 ```bash
-curl -X POST http://localhost:8000/api/v1/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{
-    "username": "john_doe",
-    "email": "john@example.com",
-    "password": "SecurePass123",
-    "password_confirmation": "SecurePass123",
-    "native_language": "en",
-    "learning_language": "es"
-  }'
+# API Tests
+cd api && php artisan test
+
+# APK Tests  
+cd apk && flutter test
 ```
 
-**Login:**
-```bash
-curl -X POST http://localhost:8000/api/v1/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{
-    "email": "john@example.com",
-    "password": "SecurePass123"
-  }'
-```
-
----
-
-## 🗺️ Roadmap
-
-- [x] **Phase 1**: Authentication & User Management (Weeks 1-4)
-- [ ] **Phase 2**: Social Features (Follow/Block) (Weeks 5-6)
-- [ ] **Phase 3**: Chat System (Real-time messaging) (Weeks 7-9)
-- [ ] **Phase 4**: Calls & Video (WebRTC) (Weeks 10-12)
-- [ ] **Phase 5**: Voice Rooms (Weeks 13-15)
-- [ ] **Phase 6**: Social Feed (Weeks 16-17)
-- [ ] **Phase 7**: Translation System (Weeks 18-19)
-- [ ] **Phase 8**: Gift System (Weeks 20-21)
-- [ ] **Phase 9**: Matching Algorithm (Weeks 22-23)
-- [ ] **Phase 10**: Notifications (Weeks 24-25)
-- [ ] **Phase 11**: Reports & Moderation (Week 26)
-- [ ] **Phase 12**: Admin Dashboard (Weeks 27-28)
-
-See [DEVELOPMENT_PLAN.md](DEVELOPMENT_PLAN.md) for detailed roadmap.
-
----
-
-## 🏗️ Tech Stack
-
-### Backend
-- **Framework**: Laravel 12
-- **Language**: PHP 8.2+
-- **Database**: MySQL / PostgreSQL
-- **Cache**: Redis
-- **Queue**: Laravel Horizon
-- **Storage**: AWS S3 / MinIO
-- **Auth**: Laravel Sanctum (JWT)
-
-### Frontend (Planned)
-- **Web**: React + TypeScript
-- **Mobile**: Flutter (iOS + Android)
-
-### Real-time
-- **WebSocket**: Laravel Echo + Socket.io
-- **Voice/Video**: WebRTC
-
-### External Services
-- **Translation**: Google Translate API / DeepL
-- **Push Notifications**: Firebase Cloud Messaging
-- **Payment**: Stripe / PayPal
-
----
-
-## 📁 Project Structure
-
-```
-talkin/
-├── api/                          # Laravel API
-│   ├── app/
-│   │   ├── Http/
-│   │   │   ├── Controllers/Api/  # API Controllers
-│   │   │   ├── Middleware/       # Custom Middleware
-│   │   │   ├── Requests/         # Form Requests
-│   │   │   └── Resources/        # API Resources
-│   │   └── Models/               # Eloquent Models
-│   ├── database/
-│   │   ├── migrations/           # Database Migrations
-│   │   └── seeders/              # Database Seeders
-│   ├── routes/
-│   │   └── api.php               # API Routes
-│   └── PHASE1_SETUP.md           # Setup Guide
-├── docs/                         # Documentation
-│   ├── blueprint/                # Architecture & Design
-│   └── dev/                      # Development Docs
-├── DEVELOPMENT_PLAN.md           # Full Development Plan
-├── PHASE1_COMPLETE.md            # Phase 1 Summary
-└── README.md                     # This file
-```
+- [API Testing Status](./docs/qa/TESTING_STATUS.md) — 200+ tests
+- [APK Testing Status](./docs/qa/APK_QA_STATUS.md) — 100+ tests
 
 ---
 
 ## 🤝 Contributing
 
-This is currently a private development project. Contributions will be opened after beta launch.
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
 
 ---
 
 ## 📄 License
 
-MIT License - see [LICENSE](LICENSE) for details.
+MIT License — see [LICENSE](LICENSE)
 
 ---
 
-## 👥 Team
+**Made with ❤️ by the BaniTalk Team**
 
-- **Backend Development**: Laravel API
-- **Frontend Development**: React + Flutter (Coming soon)
-- **DevOps**: CI/CD & Infrastructure (Coming soon)
+> "Breaking language barriers, one conversation at a time."
 
----
-
-## 📞 Contact
-
-For questions or support, please open an issue on GitHub.
-
----
-
-## 🎯 Current Sprint
-
-**Phase 1 Complete** ✅
-- 17 API endpoints
-- User authentication
-- Profile management
-- Multi-language support
-
-**Next: Phase 2** 🚀
-- Follow/unfollow system
-- Block/unblock users
-- User discovery
-
----
-
-**Last Updated**: February 26, 2026  
-**Version**: 1.0.0-phase1  
-**Status**: Phase 1 Complete - Ready for Phase 2
+*Last Updated: February 28, 2026*

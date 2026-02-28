@@ -59,6 +59,19 @@ dependencies:
   agora_rtc_engine: ^6.4.0
   video_player: ^2.8.1
   chewie: ^1.7.4
+  # Speech Learning dependencies
+  speech_to_text: ^7.0.0
+  flutter_tts: ^4.1.0
+  wave: ^0.2.2
+  flutter_sound: ^9.12.5
+  charts_flutter: ^0.12.0
+  # Phase 9: Push Notifications & Matching
+  firebase_messaging: ^15.0.0
+  flutter_local_notifications: ^18.0.0
+  flutter_card_swiper: ^0.0.3
+  percent_indicator: ^4.2.3
+  # Phase 8: Virtual Economy & Gifts
+  in_app_purchase: ^3.2.0
 
 dev_dependencies:
   flutter_test:

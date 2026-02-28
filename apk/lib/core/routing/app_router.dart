@@ -12,6 +12,11 @@ import 'package:banitalk/features/call/presentation/pages/calling_screen.dart';
 import 'package:banitalk/features/call/presentation/bloc/call_bloc.dart';
 import 'package:banitalk/features/social_feed/presentation/pages/social_feed_screen.dart';
 import 'package:banitalk/features/social_feed/presentation/bloc/social_feed_bloc.dart';
+import 'package:banitalk/features/sl/views/sl_main_view.dart';
+import 'package:banitalk/features/matching/views/matching_main_view.dart';
+import 'package:banitalk/features/gifts/views/gift_shop_view.dart';
+import 'package:banitalk/features/home/views/home_screen.dart';
+import 'package:banitalk/features/notifications/views/notifications_view.dart';
 
 class AppRouter {
   static final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -45,9 +50,7 @@ class AppRouter {
         routes: [
           GoRoute(
             path: '/',
-            builder: (context, state) => const Scaffold(
-              body: Center(child: Text('BaniTalk - Home Hub')),
-            ),
+            builder: (context, state) => const HomeScreen(),
           ),
           GoRoute(
             path: '/search',
@@ -69,6 +72,18 @@ class AppRouter {
               create: (_) => sl<SocialFeedBloc>(),
               child: const SocialFeedScreen(),
             ),
+          ),
+          GoRoute(
+            path: '/sl',
+            builder: (context, state) => const SlMainView(),
+          ),
+          GoRoute(
+            path: '/matching',
+            builder: (context, state) => const MatchingMainView(),
+          ),
+          GoRoute(
+            path: '/gifts',
+            builder: (context, state) => const GiftShopView(),
           ),
           GoRoute(
             path: '/profile/:id',
@@ -95,12 +110,9 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: '/call',
+        path: '/notifications',
         parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) => BlocProvider(
-          create: (_) => sl<CallBloc>(),
-          child: const CallingScreen(),
-        ),
+        builder: (context, state) => const NotificationsView(),
       ),
     ],
   );

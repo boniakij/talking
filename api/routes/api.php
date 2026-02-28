@@ -203,40 +203,40 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     });
 });
 
+use App\Http\Controllers\GiftController;
+
+// ... existing code ...
+
 // Gift System routes (Phase 8)
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::prefix('gifts')->group(function () {
         // Gift catalog
-        Route::get('/', [App\Http\Controllers\Api\GiftController::class, 'index']);
-        Route::get('categories', [App\Http\Controllers\Api\GiftController::class, 'categories']);
+        Route::get('/', [GiftController::class, 'index']);
+        Route::get('{id}', [GiftController::class, 'show']);
         
         // Gift transactions
-        Route::post('send', [App\Http\Controllers\Api\GiftController::class, 'send']);
-        Route::get('history', [App\Http\Controllers\Api\GiftController::class, 'history']);
-        Route::get('leaderboard', [App\Http\Controllers\Api\GiftController::class, 'leaderboard']);
+        Route::post('send', [GiftController::class, 'sendGift']);
+        Route::get('transactions', [GiftController::class, 'getTransactions']);
         
         // Coin system
-        Route::get('coins/balance', [App\Http\Controllers\Api\GiftController::class, 'balance']);
-        Route::post('coins/topup', [App\Http\Controllers\Api\GiftController::class, 'topup']);
-        Route::post('coins/confirm', [App\Http\Controllers\Api\GiftController::class, 'confirmTopup']);
-        Route::get('coins/transactions', [App\Http\Controllers\Api\GiftController::class, 'coinTransactions']);
+        Route::get('wallet', [GiftController::class, 'getWallet']);
+        Route::get('coins/packages', [GiftController::class, 'getCoinPackages']);
+        Route::post('coins/purchase', [GiftController::class, 'purchaseCoins']);
     });
 });
+
+use App\Http\Controllers\MatchingController;
 
 // Matching routes (Phase 9)
 Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
     Route::prefix('matching')->group(function () {
-        // Preferences
-        Route::get('preferences', [App\Http\Controllers\Api\MatchingController::class, 'getPreferences']);
-        Route::put('preferences', [App\Http\Controllers\Api\MatchingController::class, 'updatePreferences']);
-        
-        // Suggestions
-        Route::get('suggestions', [App\Http\Controllers\Api\MatchingController::class, 'suggestions']);
-        
-        // Match management
-        Route::post('accept/{userId}', [App\Http\Controllers\Api\MatchingController::class, 'accept']);
-        Route::post('decline/{userId}', [App\Http\Controllers\Api\MatchingController::class, 'decline']);
-        Route::get('matches', [App\Http\Controllers\Api\MatchingController::class, 'matches']);
+        Route::get('discover', [MatchingController::class, 'discover']);
+        Route::post('like', [MatchingController::class, 'likeUser']);
+        Route::post('pass', [MatchingController::class, 'passUser']);
+        Route::post('super-like', [MatchingController::class, 'superLikeUser']);
+        Route::post('undo', [MatchingController::class, 'undoSwipe']);
+        Route::get('matches', [MatchingController::class, 'getMatches']);
+        Route::get('leaderboard', [MatchingController::class, 'getLeaderboard']);
     });
 });
 
