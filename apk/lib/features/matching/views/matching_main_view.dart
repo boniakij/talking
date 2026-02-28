@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../services/matching_service.dart';
 import '../bloc/matching_bloc.dart';
 import '../views/discovery_deck_view.dart';
-import '../../../core/services/dio_service.dart';
+import '../../../core/network/api_client.dart';
 
 class MatchingMainView extends StatelessWidget {
   const MatchingMainView({super.key});
@@ -12,7 +12,7 @@ class MatchingMainView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => MatchingBloc(
-        MatchingService(DioService.instance.dio),
+        MatchingService(ApiClient().dio),
       ),
       child: const MatchingMainViewContent(),
     );

@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'potential_match.dart';
+import '../models/potential_match.dart';
 
 abstract class MatchingState extends Equatable {
   const MatchingState();
+
+  List<PotentialMatch> get matches => [];
 
   @override
   List<Object?> get props => [];

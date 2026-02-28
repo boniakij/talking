@@ -53,7 +53,7 @@ class _NotificationSettingsViewState extends State<NotificationSettingsView> {
           value: settings.messagesEnabled,
           onChanged: (value) {
             context.read<NotificationBloc>().add(
-              const UpdateNotificationSettings('messages', value),
+              UpdateNotificationSettings('messages', value),
             );
           },
         ),
@@ -64,7 +64,7 @@ class _NotificationSettingsViewState extends State<NotificationSettingsView> {
           value: settings.callsEnabled,
           onChanged: (value) {
             context.read<NotificationBloc>().add(
-              const UpdateNotificationSettings('calls', value),
+              UpdateNotificationSettings('calls', value),
             );
           },
         ),
@@ -75,7 +75,7 @@ class _NotificationSettingsViewState extends State<NotificationSettingsView> {
           value: settings.matchesEnabled,
           onChanged: (value) {
             context.read<NotificationBloc>().add(
-              const UpdateNotificationSettings('matches', value),
+              UpdateNotificationSettings('matches', value),
             );
           },
         ),
@@ -86,7 +86,7 @@ class _NotificationSettingsViewState extends State<NotificationSettingsView> {
           value: settings.giftsEnabled,
           onChanged: (value) {
             context.read<NotificationBloc>().add(
-              const UpdateNotificationSettings('gifts', value),
+              UpdateNotificationSettings('gifts', value),
             );
           },
         ),
@@ -97,7 +97,7 @@ class _NotificationSettingsViewState extends State<NotificationSettingsView> {
           value: settings.followsEnabled,
           onChanged: (value) {
             context.read<NotificationBloc>().add(
-              const UpdateNotificationSettings('follows', value),
+              UpdateNotificationSettings('follows', value),
             );
           },
         ),
@@ -108,7 +108,7 @@ class _NotificationSettingsViewState extends State<NotificationSettingsView> {
           value: settings.systemEnabled,
           onChanged: (value) {
             context.read<NotificationBloc>().add(
-              const UpdateNotificationSettings('system', value),
+              UpdateNotificationSettings('system', value),
             );
           },
         ),
@@ -121,7 +121,7 @@ class _NotificationSettingsViewState extends State<NotificationSettingsView> {
           value: settings.soundEnabled,
           onChanged: (value) {
             context.read<NotificationBloc>().add(
-              const UpdateNotificationSettings('sound', value),
+              UpdateNotificationSettings('sound', value),
             );
           },
         ),
@@ -132,7 +132,7 @@ class _NotificationSettingsViewState extends State<NotificationSettingsView> {
           value: settings.vibrationEnabled,
           onChanged: (value) {
             context.read<NotificationBloc>().add(
-              const UpdateNotificationSettings('vibration', value),
+              UpdateNotificationSettings('vibration', value),
             );
           },
         ),

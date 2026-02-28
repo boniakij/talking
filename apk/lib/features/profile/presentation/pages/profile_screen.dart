@@ -68,7 +68,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   pinned: true,
                   flexibleSpace: FlexibleSpaceBar(
                     background: Stack(
-                      fit: Stack Fit.expand,
+                      fit: StackFit.expand,
                       children: [
                         if (user.avatarUrl != null)
                           Image.network(user.avatarUrl!, fit: BoxFit.cover)

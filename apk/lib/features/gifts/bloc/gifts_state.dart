@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'gift.dart';
-import 'wallet.dart';
-import 'coin_package.dart';
+import '../models/gift.dart';
+import '../models/wallet.dart';
+import '../models/coin_package.dart';
 
 abstract class GiftsState extends Equatable {
   const GiftsState();

@@ -46,10 +46,10 @@ class PronunciationScore extends Equatable {
   }
 
   String get scoreColor {
-    if (overallScore >= 90) => '#4CAF50';
-    if (overallScore >= 80) => '#8BC34A';
-    if (overallScore >= 70) => '#FFC107';
-    if (overallScore >= 60) => '#FF9800';
+    if (overallScore >= 90) return '#4CAF50';
+    if (overallScore >= 80) return '#8BC34A';
+    if (overallScore >= 70) return '#FFC107';
+    if (overallScore >= 60) return '#FF9800';
     return '#F44336';
   }
 

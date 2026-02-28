@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
-import 'pronunciation_score.dart';
-import 'tongue_twister.dart';
-import 'leaderboard_entry.dart';
+import '../models/pronunciation_score.dart';
+import '../models/tongue_twister.dart';
+import '../models/leaderboard_entry.dart';
 
 abstract class SlState extends Equatable {
   const SlState();

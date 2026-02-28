@@ -5,7 +5,7 @@ import '../bloc/sl_event.dart';
 import '../bloc/sl_state.dart';
 import '../views/tongue_twister_levels_view.dart';
 import '../services/sl_service.dart';
-import '../../../core/services/dio_service.dart';
+import '../../../core/network/api_client.dart';
 
 class SlMainView extends StatelessWidget {
   const SlMainView({super.key});
@@ -14,7 +14,7 @@ class SlMainView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => SlBloc(
-        SlService(DioService.instance.dio),
+        SlService(ApiClient().dio),
       ),
       child: const _SlMainViewContent(),
     );
@@ -132,7 +132,7 @@ class _LearnTab extends StatelessWidget {
           
           _buildFeatureCard(
             context,
-            icon: Icons.wave,
+            icon: Icons.waves,
             title: 'Pronunciation Coach',
             description: 'Get real-time feedback on your pronunciation with waveform visualization',
             color: Colors.blue,

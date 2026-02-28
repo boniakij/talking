@@ -19,8 +19,7 @@ class ChatRepositoryImpl implements ChatRepository {
   @override
   void initWebSocket(String token) {
     PusherOptions options = PusherOptions(
-      host: 'localhost', // Change to your pusher host
-      port: 6001,
+      host: 'localhost',
       encrypted: false,
       cluster: 'mt1',
       auth: PusherAuth(

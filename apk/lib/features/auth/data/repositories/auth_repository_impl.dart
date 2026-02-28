@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:banitalk/core/network/api_client.dart';
 import 'package:banitalk/features/auth/data/models/user_model.dart';
 import 'package:banitalk/features/auth/domain/repositories/auth_repository.dart';

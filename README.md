@@ -49,6 +49,7 @@ banitalk/
 | [📋 APK Dev Plan](./docs/dev/apk-dev.md) | Updated 2026-02-28 | Development roadmap |
 | [📋 API Dev Plan](./docs/dev/api-dev.md) | Updated 2026-02-28 | API development status |
 | [🧪 APK QA Status](./docs/qa/APK_QA_STATUS.md) | 100+ Tests ✅ | APK testing results |
+| [🔑 Test Credentials](./docs/qa/CREDENTIALS.md) | 7 Users | Login credentials for testing |
 | [🧪 API QA Status](./docs/qa/TESTING_STATUS.md) | 200+ Tests ✅ | API endpoint testing |
 | [🏗️ Architecture](./docs/blueprint/) | Complete | System architecture docs |
 

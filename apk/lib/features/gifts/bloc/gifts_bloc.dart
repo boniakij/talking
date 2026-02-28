@@ -112,7 +112,7 @@ class GiftsBloc extends Bloc<GiftsEvent, GiftsState> {
       final gift = await _giftsService.getGiftById(event.giftId);
       final recipient = await _giftsService.getUserById(event.recipientId);
 
-      emit(GiftSent(gift, recipient.username));
+      emit(GiftSent(gift, recipient['username'] ?? 'Unknown'));
     } catch (e) {
       emit(GiftsError('Failed to send gift: ${e.toString()}'));
     }

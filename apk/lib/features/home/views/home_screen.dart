@@ -8,7 +8,7 @@ import '../../notifications/bloc/notification_state.dart';
 import '../../gifts/bloc/gifts_bloc.dart';
 import '../../gifts/bloc/gifts_event.dart';
 import '../../gifts/bloc/gifts_state.dart';
-import '../../../core/services/dio_service.dart';
+import '../../../core/network/api_client.dart';
 import '../../notifications/services/notification_service.dart';
 import '../../gifts/services/gifts_service.dart';
 
@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
             ..add(LoadNotifications()),
         ),
         BlocProvider(
-          create: (context) => GiftsBloc(GiftsService(DioService.instance.dio))
+          create: (context) => GiftsBloc(GiftsService(ApiClient().dio))
             ..add(LoadWallet()),
         ),
       ],

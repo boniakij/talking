@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'chat_message_model.dart';
 
 class ChatConversation extends Equatable {
   final String id;

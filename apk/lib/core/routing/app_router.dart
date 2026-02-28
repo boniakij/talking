@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:banitalk/features/profile/presentation/pages/profile_screen.dart';
 import 'package:banitalk/features/profile/presentation/pages/social_search_screen.dart';
 import 'package:banitalk/features/profile/presentation/bloc/profile_bloc.dart';
 import 'package:banitalk/shared/widgets/main_layout.dart';
-import '../../di/service_locator.dart';
+import 'package:banitalk/core/di/service_locator.dart';
 
 import 'package:banitalk/features/chat/presentation/pages/chat_list_screen.dart';
 import 'package:banitalk/features/chat/presentation/pages/chat_window_page.dart';
@@ -17,6 +20,10 @@ import 'package:banitalk/features/matching/views/matching_main_view.dart';
 import 'package:banitalk/features/gifts/views/gift_shop_view.dart';
 import 'package:banitalk/features/home/views/home_screen.dart';
 import 'package:banitalk/features/notifications/views/notifications_view.dart';
+import 'package:banitalk/features/auth/presentation/pages/login_screen.dart';
+import 'package:banitalk/features/auth/presentation/pages/register_screen.dart';
+import 'package:banitalk/features/onboarding/presentation/pages/onboarding_screen.dart';
+import 'package:banitalk/features/auth/presentation/bloc/auth_bloc.dart';
 
 class AppRouter {
   static final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();

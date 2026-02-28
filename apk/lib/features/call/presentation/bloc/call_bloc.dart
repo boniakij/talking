@@ -132,7 +132,14 @@ class CallBloc extends Bloc<CallEvent, CallState> {
   }
 
   Future<void> _setupPeerConnection(String callId) async {
-    _peerConnection = await callRepository.createPeerConnection();
+    // Create peer connection configuration
+    final configuration = <String, dynamic>{
+      'iceServers': [
+        {'url': 'stun:stun.l.google.com:19302'},
+      ]
+    };
+    
+    _peerConnection = await createPeerConnection(configuration);
     
     _peerConnection!.onIceCandidate = (candidate) {
       callRepository.sendSignalingMessage(callId, SignalingMessage(

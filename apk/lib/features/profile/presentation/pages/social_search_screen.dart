@@ -30,6 +30,8 @@ class _SocialSearchScreenState extends State<SocialSearchScreen> {
     _searchFocus.dispose();
     super.dispose();
   }
+
+  final List<String> _popularSearches = [
     'Language Tutors',
     'Tech Geeks',
     'Travelers',

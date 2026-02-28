@@ -1,10 +1,10 @@
-import '../data/models/chat_conversation_model.dart';
-import '../data/models/chat_message_model.dart';
+import 'entities/chat_conversation_entity.dart';
+import 'entities/chat_message_entity.dart';
 
 abstract class ChatRepository {
   Future<List<ChatConversation>> getConversations();
   Future<List<ChatMessage>> getMessages(String conversationId);
-  Future<ChatMessage> sendMessage(String conversationId, String content, MessageType type);
+  Future<ChatMessage> sendMessage(String conversationId, String content, ChatMessageType type);
   Future<void> markAsRead(String conversationId);
   
   // WebSocket methods

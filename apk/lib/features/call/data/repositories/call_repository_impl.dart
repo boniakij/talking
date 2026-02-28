@@ -26,7 +26,6 @@ class CallRepositoryImpl implements CallRepository {
   void initWebSocket(String token) {
     PusherOptions options = PusherOptions(
       host: 'localhost',
-      port: 6001,
       encrypted: false,
       cluster: 'mt1',
       auth: PusherAuth(
@@ -90,24 +89,6 @@ class CallRepositoryImpl implements CallRepository {
   @override
   Future<void> endCall(String callId) async {
     await apiClient.dio.post('/calls/$callId/end');
-  }
-
-  @override
-  Future<RTCPeerConnection> createPeerConnection() async {
-    Map<String, dynamic> configuration = {
-      'iceServers': [
-        {'url': 'stun:stun.l.google.com:19302'},
-      ]
-    };
-
-    final Map<String, dynamic> constraints = {
-      'mandatory': {},
-      'optional': [
-        {'DtlsSrtpKeyAgreement': true},
-      ],
-    };
-
-    return await createPeerConnection(configuration, constraints);
   }
 
   @override

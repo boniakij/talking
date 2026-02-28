@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import '../bloc/matching_bloc.dart';
 import '../bloc/matching_event.dart';
 import '../bloc/matching_state.dart';
@@ -15,7 +14,8 @@ class DiscoveryDeckView extends StatefulWidget {
 }
 
 class _DiscoveryDeckViewState extends State<DiscoveryDeckView> {
-  final CardSwiperController _swiperController = CardSwiperController();
+  int _currentIndex = 0;
+  final PageController _pageController = PageController();
 
   @override
   void initState() {
@@ -25,7 +25,7 @@ class _DiscoveryDeckViewState extends State<DiscoveryDeckView> {
 
   @override
   void dispose() {
-    _swiperController.dispose();
+    _pageController.dispose();
     super.dispose();
   }
 
@@ -94,27 +94,25 @@ class _DiscoveryDeckViewState extends State<DiscoveryDeckView> {
     final matches = state.matches;
     final currentIndex = state.currentIndex;
 
+    if (matches.isEmpty || currentIndex >= matches.length) {
+      return _buildEmptyState();
+    }
+
     return Column(
       children: [
         Expanded(
           flex: 3,
           child: Padding(
             padding: const EdgeInsets.all(16),
-            child: CardSwiper(
-              controller: _swiperController,
-              cardsCount: matches.length - currentIndex,
-              numberOfCardsDisplayed: 2,
-              backCardOffset: const Offset(0, 20),
-              onSwipe: (previousIndex, currentIndex, direction) {
-                final match = matches[previousIndex + currentIndex];
-                if (direction == CardSwiperDirection.left) {
-                  context.read<MatchingBloc>().add(SwipeLeft(match.id));
-                } else if (direction == CardSwiperDirection.right) {
-                  context.read<MatchingBloc>().add(SwipeRight(match.id));
-                }
-                return true;
+            child: PageView.builder(
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
               },
-              cardBuilder: (context, index, percentThresholdX, percentThresholdY) {
+              itemCount: matches.length - currentIndex,
+              itemBuilder: (context, index) {
                 final matchIndex = currentIndex + index;
                 if (matchIndex >= matches.length) return const SizedBox.shrink();
                 return _buildMatchCard(matches[matchIndex]);
@@ -311,7 +309,15 @@ class _DiscoveryDeckViewState extends State<DiscoveryDeckView> {
           _buildActionButton(
             icon: Icons.close,
             color: Colors.red,
-            onPressed: () => _swiperController.swipe(CardSwiperDirection.left),
+            onPressed: () {
+              final state = context.read<MatchingBloc>().state;
+              if (state is PotentialMatchesLoaded && state.currentMatch != null) {
+                context.read<MatchingBloc>().add(SwipeLeft(state.currentMatch!.id));
+              }
+              if (_currentIndex < state.matches.length - 1) {
+                _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+              }
+            },
           ),
           _buildActionButton(
             icon: Icons.undo,
@@ -322,18 +328,27 @@ class _DiscoveryDeckViewState extends State<DiscoveryDeckView> {
             icon: Icons.star,
             color: Colors.blue,
             onPressed: () {
-              // Super like functionality
               final state = context.read<MatchingBloc>().state;
               if (state is PotentialMatchesLoaded && state.currentMatch != null) {
                 context.read<MatchingBloc>().add(SuperLike(state.currentMatch!.id));
-                _swiperController.swipe(CardSwiperDirection.right);
+                if (_currentIndex < state.matches.length - 1) {
+                  _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+                }
               }
             },
           ),
           _buildActionButton(
             icon: Icons.favorite,
             color: Colors.green,
-            onPressed: () => _swiperController.swipe(CardSwiperDirection.right),
+            onPressed: () {
+              final state = context.read<MatchingBloc>().state;
+              if (state is PotentialMatchesLoaded && state.currentMatch != null) {
+                context.read<MatchingBloc>().add(SwipeRight(state.currentMatch!.id));
+              }
+              if (_currentIndex < state.matches.length - 1) {
+                _pageController.nextPage(duration: const Duration(milliseconds: 300), curve: Curves.easeInOut);
+              }
+            },
           ),
         ],
       ),

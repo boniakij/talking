@@ -83,14 +83,8 @@ class NotificationService {
         importance: Importance.defaultImportance,
       );
 
-      await _localNotifications
-          .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
-          ?.createNotificationChannels([
-        callChannel,
-        messageChannel,
-        matchChannel,
-        generalChannel,
-      ]);
+      // Note: Notification channels are created automatically when notifications are shown
+      // with the specified channel ID in AndroidNotificationDetails
     }
   }
 
