@@ -1,0 +1,3 @@
+    flutter build apk --debug
+
+    
